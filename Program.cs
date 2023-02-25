@@ -8,13 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-//var connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
-builder.Services.AddSqlite<DataContext>("Data Source = cadeteria.db;");
-//builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(connectionString));
+//builder.Services.AddSqlite<DataContext>("Data Source = Cadeteria.db;");
+
+builder.Services.AddSqlServer<DataContext>(builder.Configuration.GetConnectionString("SQLServer"));
 
 builder.Services.AddScoped<ICadeteRepository, CadeteRepository>();
-
-
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 var app = builder.Build();
 
